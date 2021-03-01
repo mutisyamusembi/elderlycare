@@ -1,3 +1,26 @@
+<?php 
+use Twilio\Rest\Client;
+
+if (isset($_POST["save_button"])) {
+
+$sid = getenv("TWILIO_ACCOUNT_SID");
+$token = getenv("TWILIO_AUTH_TOKEN");
+$twilio = new Client($sid, $token);
+
+$message = $twilio->messages
+                  ->create("+254797578553", // to
+                           [
+                               "body" => "This will be the body of the new message!",
+                               "from" => "+15098347154"
+                           ]
+                  );
+
+print($message->sid); 
+
+}   
+?> 
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -99,36 +122,49 @@
                                     <h1 class="modal-title">Prescription</h1>
                                 </div>
                                     <div class="modal-body">
-
-                                    {!! Form::open(['action' => 'App\Http\Controllers\PrepController@store','method' => 'POST']) !!}
+                                        <form method="POST" action="{{action('App\Http\Controllers\PrepController@store')}}">
+                                            @csrf
+                                    {{-- {!! Form::open(['action' => 'App\Http\Controllers\PrepController@store','method' => 'POST']) !!} --}}
                                     <div class = 'form-group'>
 
-                                        {{Form::label('disease','Disease')}}
-                                        {{Form::text('disease','',['class'=>'form-control','required'])}}
-                                        {{Form::label('medicine','Medicine')}}
-                                        {{Form::text('medicine','',['class'=>'form-control','required'])}}
+                                        {{-- {{Form::label('disease','Disease')}}
+                                        {{Form::text('disease','',['class'=>'form-control','required'])}} --}}
+                                        <input id="disease" type="text" class="form-control form-control form-control-user @error('disease') is-invalid @enderror" name="disease" value="{{ old('disease') }}" placeholder="Disease" required  autofocus>
+                                        {{-- {{Form::label('medicine','Medicine')}}
+                                        {{Form::text('medicine','',['class'=>'form-control','required'])}} --}}
+                                        <br>
+                                        <input id="disease" type="text" class="form-control form-control form-control-user @error('medicine') is-invalid @enderror" name="medicine" value="{{ old('medicine') }}" placeholder="Medicine" required  autofocus>
+                                        <br>
                                         <p>Dosage</p>
                                         <div class="row">
                                             <div class="col-6">
-                                                {{Form::label('dosage_pills','Number of Pills')}}
-                                                {{Form::number('dosage_pills','',['class'=>'form-control','required'])}}
+                                                {{-- {{Form::label('dosage_pills','Number of Pills')}}
+                                                {{Form::number('dosage_pills','',['class'=>'form-control','required'])}} --}}
+                                                <input id="dosage_pills" type="number" class="form-control form-control form-control-user @error('dosage_pills') is-invalid @enderror" name="dosage_pills" value="{{ old('dosage_pills') }}" placeholder="Number of pills" required  autofocus>
                                             </div>
                                             <div class="col-6">
-                                                {{Form::label('dosage_number','Times taken daily')}}
-                                                {{Form::number('dosage_number','',['class'=>'form-control','required'])}}
+                                                {{-- {{Form::label('dosage_number','Times taken daily')}}
+                                                {{Form::number('dosage_number','',['class'=>'form-control','required'])}} --}}
+                                                <input id="dosage_number" type="number" class="form-control form-control form-control-user @error('dosage_number') is-invalid @enderror" name="dosage_number" value="{{ old('dosage_number') }}" placeholder="Times taken daily" required  autofocus>
+                                                
 
                                             </div>
+                                            <br>
 
                                         </div> 
-                                        {{Form::label('date','Start Date')}}
-                                        {{Form::date('date','',['class'=>'form-control','required'])}}
+                                        {{-- {{Form::label('date','Start Date')}}
+                                        {{Form::date('date','',['class'=>'form-control','required'])}} --}}
+                                        <input id="date" type="date" class="form-control form-control form-control-user @error('date') is-invalid @enderror" name="date" value="{{ old('date ') }}" placeholder="Start Date" required  autofocus>
                                         <p class="m-2">
-                                            {{Form::submit('Save',['class'=>'btn btn-primary'])}}
+                                            {{-- {{Form::submit('Save',['class'=>'btn btn-primary'])}} --}}
+                                            <button type="submit" name ="save_button"class="btn btn-primary center">
+                                                Save
+                                            </button>
                                         </p>
                                         
 
                                     </div>
-                                            {!! Form::close() !!}
+                                            {{-- {!! Form::close() !!} --}}
 
                                 </div>
                              </div><!-- /.modal-content -->

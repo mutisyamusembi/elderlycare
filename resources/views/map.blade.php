@@ -20,6 +20,15 @@
   var map=new     google.maps.Map(document.getElementById("googleMap"),mapProp);
  }
  google.maps.event.addDomListener(window, 'load', initialize);
+
+ var marker = new google.maps.Marker({
+    position:{ lat: -1.2834, lng: 36.8235 },
+    title:"Hello World!"
+    map: map;
+});
+
+// To add the marker to the map, call setMap();
+marker.setMap(map);
  </script>
 
  </head>
