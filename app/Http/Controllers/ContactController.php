@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Prep;
+use App\Models\Contacts;
 use Twilio\Rest\Client;
 
-class PrepController extends Controller
+class ContactController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +15,8 @@ class PrepController extends Controller
      */
     public function index()
     {   
-        $preps = Prep::all();
-
-        return view('med')->with('prep',$preps);
+        $contact = Contacts::all();
+        return view('contact')->with('contact',$contact);
     }
 
     /**
@@ -38,35 +37,34 @@ class PrepController extends Controller
      */
     public function store(Request $request)
     {
-        $prep = new Prep;
-        $prep->disease = $request->input('disease');
-        $prep->medicine = $request->input('medicine');
-        $prep->pillnumber = $request->input('dosage_pills');
-        $prep->dosage = $request->input('dosage_number');
-        $prep->startdate = $request->input('date');
+        $cont = new Contacts;
+        $cont->name = $request->input('name');
+        $cont->phone = $request->input('phone');
+        
         //Sending a message to the Arduiono of the new changes.
         $account_sid = getenv("TWILIO_ACCOUNT_SID");
         $auth_token = getenv("TWILIO_AUTH_TOKEN");
+      
         
         $client = new Client($account_sid, $auth_token);
         $client->messages->create(
             // Where to send a text message (your cell phone?)
             '+254797578553',
             array(
-                'from' => env( 'TWILIO_FROM' ),
-                'body' => "Start". $prep->medicine,
+                'from' =>'',
+                'body' => "Start". $cont->phone,
             )
         );
 
-        $prep->save();
+        $cont->save();
 
-        return redirect ('/prep')->with('success','Prescription saved');
+        return redirect ('/contact')->with('success','Contact added');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int  $id 
      * @return \Illuminate\Http\Response
      */
     public function show($id)

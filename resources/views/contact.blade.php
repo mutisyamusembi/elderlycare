@@ -63,7 +63,7 @@
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('contact')}}">
+                <a class="nav-link" href="">
                     <i class="fas fa-address-book"></i> 
                     <span>Contacts</span></a>
             </li>
@@ -83,8 +83,8 @@
          <div class="container-fluid">
 
             <!-- Page Heading -->
-            <h1 class="h3 mb-2 text-gray-800">Prescriptions</h1>
-            <p class="mb-4">This is a list of all prescritions that you have created reminders for. 
+            <h1 class="h3 mb-2 text-gray-800">Contacts</h1>
+            <p class="mb-4">This is a list of all contacts that are reached in case of emergency. Maximum is 5 
             </p>
                     <button type="button" class="btn btn-primary btn-icon-split m-2" data-toggle="modal" data-target="#ModalLoginForm">
                         <span class="icon text-white-50">
@@ -97,42 +97,27 @@
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h1 class="modal-title">Prescription</h1>
+                                    <h1 class="modal-title">Emergency Contacts</h1>
                                 </div>
                                     <div class="modal-body">
-                                        <form method="POST" action="{{action('App\Http\Controllers\PrepController@store')}}">
+                                        <form method="POST" action="{{action('App\Http\Controllers\ContactController@store')}}">
                                             @csrf
                                     {{-- {!! Form::open(['action' => 'App\Http\Controllers\PrepController@store','method' => 'POST']) !!} --}}
                                     <div class = 'form-group'>
 
                                         {{-- {{Form::label('disease','Disease')}}
                                         {{Form::text('disease','',['class'=>'form-control','required'])}} --}}
-                                        <input id="disease" type="text" class="form-control form-control form-control-user @error('disease') is-invalid @enderror" name="disease" value="{{ old('disease') }}" placeholder="Disease" required  autofocus>
+                                        <input id="name" type="text" class="form-control form-control form-control-user @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" placeholder="Name of Individual/ Institution" required  autofocus>
                                         {{-- {{Form::label('medicine','Medicine')}}
                                         {{Form::text('medicine','',['class'=>'form-control','required'])}} --}}
                                         <br>
-                                        <input id="disease" type="text" class="form-control form-control form-control-user @error('medicine') is-invalid @enderror" name="medicine" value="{{ old('medicine') }}" placeholder="Medicine" required  autofocus>
+                                        <input id="phone" type="number" class="form-control form-control form-control-user @error('phone') is-invalid @enderror" name="phone" value="{{ old('medicine') }}" placeholder="Phone Number" required  autofocus>
                                         <br>
-                                        <p>Dosage</p>
-                                        <div class="row">
-                                            <div class="col-6">
-                                                {{-- {{Form::label('dosage_pills','Number of Pills')}}
-                                                {{Form::number('dosage_pills','',['class'=>'form-control','required'])}} --}}
-                                                <input id="dosage_pills" type="number" class="form-control form-control form-control-user @error('dosage_pills') is-invalid @enderror" name="dosage_pills" value="{{ old('dosage_pills') }}" placeholder="Number of pills" required  autofocus>
-                                            </div>
-                                            <div class="col-6">
-                                                {{-- {{Form::label('dosage_number','Times taken daily')}}
-                                                {{Form::number('dosage_number','',['class'=>'form-control','required'])}} --}}
-                                                <input id="dosage_number" type="number" class="form-control form-control form-control-user @error('dosage_number') is-invalid @enderror" name="dosage_number" value="{{ old('dosage_number') }}" placeholder="Times taken daily" required  autofocus>
-                                                
 
-                                            </div>
-                                            <br>
-
-                                        </div> 
+                                        
                                         {{-- {{Form::label('date','Start Date')}}
                                         {{Form::date('date','',['class'=>'form-control','required'])}} --}}
-                                        <input id="date" type="date" class="form-control form-control form-control-user @error('date') is-invalid @enderror" name="date" value="{{ old('date ') }}" placeholder="Start Date" required  autofocus>
+                                        
                                         <p class="m-2">
                                             {{-- {{Form::submit('Save',['class'=>'btn btn-primary'])}} --}}
                                             <button type="submit" name ="save_button"class="btn btn-primary center">
@@ -155,27 +140,23 @@
             <!-- DataTales Example -->
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Existing Prescriptions</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">Existing Contacts</h6>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             <thead>
                                 <tr>
-                                    <th>Disease</th>
-                                    <th>Medicine</th>
-                                    <th>Daily Dosage</th>
-                                    <th>Start Date</th>
+                                    <th>Name of Person / Institution </th>
+                                    <th>Phone</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @if(count($prep)>0)
-                                @foreach ($prep as $prescription)
+                                @if(count($contact)>0)
+                                @foreach ($contact as $cont)
                                 <tr>
-                                    <th>{{$prescription->disease}}</th>
-                                    <th>{{$prescription->medicine}}</th>
-                                    <th>{{$prescription->pillnumber}} * {{$prescription->dosage}}</th>
-                                    <th>{{$prescription->startdate}}</th>
+                                    <th>{{$cont->name}}</th>
+                                    <th>{{$cont->phone}}</th>                                    
                                 </tr>
                                     
                                 @endforeach
