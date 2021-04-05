@@ -56,14 +56,14 @@
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
-                <a class="nav-link" href="tables.html">
+                <a class="nav-link" href="{{ route('prep.index')}}">
                     <i class="fas fa-prescription-bottle"></i>
                     <span>Prescriptions</span></a>
             </li>
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('contact')}}">
+                <a class="nav-link" href="{{ route('contact.index')}}">
                     <i class="fas fa-address-book"></i> 
                     <span>Contacts</span></a>
             </li>

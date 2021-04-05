@@ -19,8 +19,9 @@
 
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAHzj9SepviHiSNYs25bL87-MLPzxKAYDE&libraries=places"></script>
     <!-- Map JS-->
-    <script>
+    <!-- <script>
     
         let map;
   
@@ -30,6 +31,70 @@
             zoom: 8,
           });
         }
+      </script> -->
+
+      <script>
+      function initAutocomplete() {
+  var map = new google.maps.Map(document.getElementById('map'), {
+    center: {
+      lat: -1.292,
+      lng: 36.821
+    },
+    zoom: 8,
+    disableDefaultUI:true
+  });
+
+  // Create the search box and link it to the UI element.
+  var input = document.getElementById('my-input-searchbox');
+  var searchBox = new google.maps.places.SearchBox(input);
+  map.controls[google.maps.ControlPosition.TOP_CENTER].push(input);
+
+  // Bias the SearchBox results towards current map's viewport.
+  map.addListener('bounds_changed', function() {
+    searchBox.setBounds(map.getBounds());
+  });
+
+  var markers = [];
+  // Listen for the event fired when the user selects a prediction and retrieve
+  // more details for that place.
+  searchBox.addListener('places_changed', function() {
+    var places = searchBox.getPlaces();
+    if (places.length == 0) {
+      return;
+    }
+    // Clear out the old markers.
+    markers.forEach(function(marker) {
+      marker.setMap(null);
+    });
+    markers = [];
+    // For each place, get the location.
+    var bounds = new google.maps.LatLngBounds();
+    places.forEach(function(place) {
+      if (!place.geometry) {
+        console.log("Returned place contains no geometry");
+        return;
+      }
+
+      // Create a marker for each place.
+      markers.push(new google.maps.Marker({
+        map: map,
+        position: place.geometry.location
+      }));
+
+      if (place.geometry.viewport) {
+        // Only geocodes have viewport.
+        bounds.union(place.geometry.viewport);
+      } else {
+        bounds.extend(place.geometry.location);
+      }
+    });
+    map.fitBounds(bounds);
+  });
+}
+document.addEventListener("DOMContentLoaded", function(event) {
+  initAutocomplete();
+});
+      
       </script>
 
 </head>
@@ -108,33 +173,21 @@
                                 <div
                                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                                     <h6 class="m-0 font-weight-bold text-primary">Current Location</h6>
-                                    <div class="dropdown no-arrow">
-                                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                                        </a>
-                                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-                                            aria-labelledby="dropdownMenuLink">
-                                            <div class="dropdown-header">Dropdown Header:</div>
-                                            <a class="dropdown-item" href="#">Action</a>
-                                            <a class="dropdown-item" href="#">Another action</a>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="#">Something else here</a>
-                                        </div>
-                                    </div>
+                                    
                                 </div>
                                 <!-- Card Body -->
                                 <div class="card-body">
                                     {{-- <div class="chart-area">
                                         <canvas id="myAreaChart"></canvas>
                                     </div> --}}
+                                    <input id="my-input-searchbox" type="text" class="form-control form-control form-control-user" name="nammy-input-searchboxe"  placeholder="Search a location" >
                                     <div id="map" style="width:1050px;height:500px" ></div>
 
                                             <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
-                                            <script
+                                            <!-- <script
                                             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA1eLwDmikw9ScVZIaEQqBcK4XVfx3ndg4&callback=initMap&libraries=&v=weekly"
                                             async
-                                            ></script>
+                                            ></script> -->
                                 </div>
                             </div>
                         </div>
