@@ -132,7 +132,7 @@
 
                                             <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
                                             <script
-                                            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA1eLwDmikw9ScVZIaEQqBcK4XVfx3ndg4&callback=initMap&libraries=&v=weekly"
+                                            src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap&libraries=&v=weekly"
                                             async
                                             ></script>
                                 </div>

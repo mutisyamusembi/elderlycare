@@ -19,7 +19,11 @@
 
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
+<<<<<<< HEAD
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAPS_API_KEY') }}&libraries=places"></script>
+=======
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=&libraries=places"></script>
+>>>>>>> 5631ecd13f5889114be9e412e016fe1b3e602f6a
     <!-- Map JS-->
     <!-- <script>
     
