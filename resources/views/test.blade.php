@@ -19,7 +19,7 @@
 
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAHzj9SepviHiSNYs25bL87-MLPzxKAYDE&libraries=places"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAPS_API_KEY') }}&libraries=places"></script>
     <!-- Map JS-->
     <!-- <script>
     
@@ -33,69 +33,9 @@
         }
       </script> -->
 
-      <script>
-      function initAutocomplete() {
-  var map = new google.maps.Map(document.getElementById('map'), {
-    center: {
-      lat: -1.292,
-      lng: 36.821
-    },
-    zoom: 8,
-    disableDefaultUI:true
-  });
-
-  // Create the search box and link it to the UI element.
-  var input = document.getElementById('my-input-searchbox');
-  var searchBox = new google.maps.places.SearchBox(input);
-  map.controls[google.maps.ControlPosition.TOP_CENTER].push(input);
-
-  // Bias the SearchBox results towards current map's viewport.
-  map.addListener('bounds_changed', function() {
-    searchBox.setBounds(map.getBounds());
-  });
-
-  var markers = [];
-  // Listen for the event fired when the user selects a prediction and retrieve
-  // more details for that place.
-  searchBox.addListener('places_changed', function() {
-    var places = searchBox.getPlaces();
-    if (places.length == 0) {
-      return;
-    }
-    // Clear out the old markers.
-    markers.forEach(function(marker) {
-      marker.setMap(null);
-    });
-    markers = [];
-    // For each place, get the location.
-    var bounds = new google.maps.LatLngBounds();
-    places.forEach(function(place) {
-      if (!place.geometry) {
-        console.log("Returned place contains no geometry");
-        return;
-      }
-
-      // Create a marker for each place.
-      markers.push(new google.maps.Marker({
-        map: map,
-        position: place.geometry.location
-      }));
-
-      if (place.geometry.viewport) {
-        // Only geocodes have viewport.
-        bounds.union(place.geometry.viewport);
-      } else {
-        bounds.extend(place.geometry.location);
-      }
-    });
-    map.fitBounds(bounds);
-  });
-}
-document.addEventListener("DOMContentLoaded", function(event) {
-  initAutocomplete();
-});
+      <!-- <script>
       
-      </script>
+      </script> -->
 
 </head>
 
@@ -170,17 +110,43 @@ document.addEventListener("DOMContentLoaded", function(event) {
                         <div class="col-xl-12 col-lg-12">
                             <div class="card shadow mb-4">
                                 <!-- Card Header - Dropdown -->
+                                <form method="POST" action="{{ route('test.store') }}" >
+                                @csrf
                                 <div
                                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                                     <h6 class="m-0 font-weight-bold text-primary">Current Location</h6>
-                                    
+                                    <!-- <div>
+                                        
+
+                                        <button class="btn btn-primary" id="edit_location"  name="Editlocation"> Edit</button>
+                                        <div style="display:none" id="show_options">
+                                        <a href=" {{route('test.index') }}" class="btn btn-secondary" name="Back"> Back</a>
+                                        
+                                        </div>
+
+                                        <script>
+                                         var button = document.getElementById('edit_location')
+                                          button.addEventListener('click',hideshow,false);
+
+                                          function hideshow() {
+                                              document.getElementById('show_options').style.display = 'block'; 
+                                              document.getElementById('my-input-searchbox').style.display = 'block'
+                                              this.style.display = 'none'
+                                          }  
+                 
+
+                                        </script>
+                                      
+                                    </div> -->
                                 </div>
                                 <!-- Card Body -->
-                                <div class="card-body">
-                                    {{-- <div class="chart-area">
-                                        <canvas id="myAreaChart"></canvas>
-                                    </div> --}}
-                                    <input id="my-input-searchbox" type="text" class="form-control form-control form-control-user" name="nammy-input-searchboxe"  placeholder="Search a location" >
+                                <button class="btn btn-success" type="submit" name="Editlocation"> Save</button>
+                                    
+                                    <input id="my-input-searchbox" type="text" class="form-control form-control form-control-user" name="nammy-input-searchbox"  placeholder="Search a location" >
+                                    <input type="hidden" name="address_latitude" id="address-latitude" value="0" />
+                                    <input type="hidden" name="address_longitude" id="address-longitude" value="0" />
+                                    
+                                    
                                     <div id="map" style="width:1050px;height:500px" ></div>
 
                                             <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
@@ -189,6 +155,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                                             async
                                             ></script> -->
                                 </div>
+                                </form>
                             </div>
                         </div>
 
@@ -246,6 +213,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
+    <script src="js/mapInput.js"></script>
 
     <!-- Page level plugins -->
     <script src="vendor/chart.js/Chart.min.js"></script>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Location;
 
 class TestController extends Controller
 {
@@ -34,10 +35,15 @@ class TestController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $local = new Location; 
+
+        $local->address_latitude = $request->latitude;
+        $local->address_longitude = $request->longitude;
+        $local->save();
+       
     }
 
-    /**
+    /** 
      * Display the specified resource.
      *
      * @param  int  $id
