@@ -36,10 +36,11 @@ class TestController extends Controller
     public function store(Request $request)
     {
         $local = new Location; 
-
-        $local->address_latitude = $request->latitude;
-        $local->address_longitude = $request->longitude;
+        $local->address_address = $request->location;
+        $local->address_latitude = $request->lat;
+        $local->address_longitude = $request->lng;
         $local->save();
+        
        
     }
 

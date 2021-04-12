@@ -42,7 +42,11 @@ places.forEach(function(place) {
     console.log("Returned place contains no geometry");
     return;
   }
+  var lat = place.geometry.location.lat();
+  var long = place.geometry.location.lng();
+  
 
+  document.write(lat);
   // Create a marker for each place.
   markers.push(new google.maps.Marker({
     map: map,
@@ -50,7 +54,14 @@ places.forEach(function(place) {
     draggable: true
   }));
 
-    
+  // const contentString = place.geometry.location;
+  // const infowindow = new google.maps.InfoWindow({
+  //   content: contentString,
+  // });
+
+  // marker.addListener("click", () => {
+  //   infowindow.open(map, marker);
+  // });
 
   if (place.geometry.viewport) {
     // Only geocodes have viewport.
@@ -58,6 +69,8 @@ places.forEach(function(place) {
   } else {
     bounds.extend(place.geometry.location);
   }
+
+  // newFunction(place);
 
 
   Array(); // creates an array of objects
@@ -74,6 +87,12 @@ map.fitBounds(bounds);
 });
 
 
+
+  // function newFunction(place) {
+  //   var infowindow = new google.maps.InfoWindow();
+  //   infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + "<br>" + place.geometry.location);
+  //   infowindow.open(map, marker);
+ // }
 // var lat = markers.getPosition().lat();
 // var lng = markers.getPosition().lng();
 
