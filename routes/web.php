@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('index');
+    return view('index2');
 });
 
 
@@ -23,3 +23,4 @@ Route::get('/home','App\Http\Controllers\PagesController@index');
 Route::resource('/prep','App\Http\Controllers\PrepController');
 Route::resource('/test','App\Http\Controllers\TestController');
 Route::resource('/contact','App\Http\Controllers\ContactController');
+Route::resource('/test2','App\Http\Controllers\Test2Controller');
