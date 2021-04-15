@@ -3,10 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Location;
 
-
-class Test2Controller extends Controller
+class ConfigController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,10 +12,8 @@ class Test2Controller extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {   
-
-        $current_location = Location::latest()->first();
-        return view('index')->with('current_location',$current_location);
+    {
+        return view('configuration');
     }
 
     /**

@@ -5,8 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Location;
 
-
-class Test2Controller extends Controller
+class LocationConfigController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,10 +13,8 @@ class Test2Controller extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {   
-
-        $current_location = Location::latest()->first();
-        return view('index')->with('current_location',$current_location);
+    {
+        return view('locationconf');
     }
 
     /**
@@ -38,7 +35,12 @@ class Test2Controller extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $local = new Location; 
+        $local->address_address = $request->location;
+        $local->address_latitude = $request->lat;
+        $local->address_longitude = $request->lng;
+        $local->save();
+        return view('configuration')->with('success','Address Changed Sucessfulyy');
     }
 
     /**

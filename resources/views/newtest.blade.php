@@ -23,7 +23,7 @@
 
     var circle = new google.maps.Circle({
   map: map,
-  radius: 150,    // 10 miles in metres
+  radius: 150,    
   fillColor: '#AA0000'
 });
 circle.bindTo('center', marker, 'position');

@@ -7,7 +7,7 @@
   
         function initMap() {
           map = new google.maps.Map(document.getElementById("map"), {
-            center: {lat: {{$current_location->address_latitude}}, lng: {{$current_location->address_longitude}}},
+            center: { lat: {{$current_location->address_latitude}} , lng: {{$current_location->address_longitude}} },
             zoom: 18,
           });
 
@@ -26,38 +26,29 @@
         }
       </script>
 
+                    <div class="d-sm-flex align-items-center justify-content-between mt-4">
+                        <h1 class="h3 mb-0 text-gray-800">Home</h1>
+                        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                                class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+                    </div>
+
 <div class="row">
-    <div class="col-xl-9 col-lg-9">
+    <div class="col-xl-12 col-lg-12 mt-2">
 
         <div class="card shadow mb-4">
             <!-- Card Header -->
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                 <h6 class="m-0 font-weight-bold text-primary">Current Location</h6>
             </div>
+
+            
             <!-- Card Body -->
             <div class="card-body">
              <!-- Map -->
-                <div id="map" style="width:750px;height:510px" ></div>
+                <div id="map" style="width:1040px;height:510px" ></div>
                 <script 
                 src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAPS_API_KEY')}}&callback=initMap&libraries=places&v=weekly" async >
                 </script>
-            </div>
-
-        </div>
-    </div>
-
-    <div class="col-xl-3 col-lg-3">
-
-        <div class="card shadow mb-4">
-            <!-- Card Header -->
-            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <h6 class="m-0 font-weight-bold text-primary">Status</h6>
-            </div>
-            <!-- Card Body -->
-            <div class="card-body" style="height:550px">
-             <!-- Satus Section -->
-             <button class="btn btn-secondary">Get Status</button>
-              
             </div>
 
         </div>
