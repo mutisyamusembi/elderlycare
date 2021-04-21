@@ -38,10 +38,14 @@ class ContactController extends Controller
     public function store(Request $request)
     {
         $cont = new Contacts;
-        $cont->name = $request->input('name');
-        $cont->phone = $request->input('phone');
+        $cont->name1 = $request->input('name1');
+        $cont->phone1 = $request->input('phone1');
+        $cont->name2 = $request->input('name2');
+        $cont->phone2 = $request->input('phone2');
+        $cont->name3 = $request->input('name3');
+        $cont->phone3 = $request->input('phone3');
         
-        //Sending a message to the Arduiono of the new changes.
+        //Sending a message to the Arduino of the new changes.
         $account_sid = getenv("TWILIO_ACCOUNT_SID");
         $auth_token = getenv("TWILIO_AUTH_TOKEN");
       
@@ -51,14 +55,14 @@ class ContactController extends Controller
             // Where to send a text message (your cell phone?)
             '+254797578553',
             array(
-                'from' =>'',
-                'body' => "Start". $cont->phone,
+                'from' =>'+15098347154',
+                'body' => "CONTACTS P1:". $cont->phone1.";N1:".$cont->name1.";P2:".$cont->phone2.";N2:".$cont->name2.";P3:".$cont->phone3.";N3:".$cont->name3.";END",
             )
         );
 
         $cont->save();
 
-        return redirect ('/contact')->with('success','Contact added');
+        return redirect ()->route('config.index')->with('success','Contacts added');
     }
 
     /**

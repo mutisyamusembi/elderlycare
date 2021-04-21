@@ -20,9 +20,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::resource('/','App\Http\Controllers\HomeController');
 Route::get('/home','App\Http\Controllers\PagesController@index');
-Route::resource('/prep','App\Http\Controllers\PrepController');
+//Route::resource('/prep','App\Http\Controllers\PrepController');
 Route::resource('/test','App\Http\Controllers\TestController');
 Route::resource('/contact','App\Http\Controllers\ContactController');
 Route::resource('/test2','App\Http\Controllers\Test2Controller');
 Route::resource('/config','App\Http\Controllers\ConfigController');
 Route::resource('/locationconf','App\Http\Controllers\LocationConfigController');
+Route::resource('/prep','App\Http\Controllers\PrescriptionController');

@@ -28,8 +28,7 @@
 
                     <div class="d-sm-flex align-items-center justify-content-between mt-4">
                         <h1 class="h3 mb-0 text-gray-800">Home</h1>
-                        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                                class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+                        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"> Actions</a>
                     </div>
 
 <div class="row">
@@ -45,7 +44,7 @@
             <!-- Card Body -->
             <div class="card-body">
              <!-- Map -->
-                <div id="map" style="width:1040px;height:510px" ></div>
+                <div id="map" style="width:1200px;height:510px" ></div>
                 <script 
                 src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAPS_API_KEY')}}&callback=initMap&libraries=places&v=weekly" async >
                 </script>

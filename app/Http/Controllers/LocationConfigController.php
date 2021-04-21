@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Location;
+use Twilio\Rest\Client;
 
 class LocationConfigController extends Controller
 {
@@ -39,8 +40,25 @@ class LocationConfigController extends Controller
         $local->address_address = $request->location;
         $local->address_latitude = $request->lat;
         $local->address_longitude = $request->lng;
+
+        $account_sid = getenv("TWILIO_ACCOUNT_SID");
+        $auth_token = getenv("TWILIO_AUTH_TOKEN");
+      
+        
+        $client = new Client($account_sid, $auth_token);
+        $client->messages->create(
+            // Where to send a text message (your cell phone?)
+            '+254797578553',
+            array(
+                'from' =>'+15098347154',
+                'body' => "LOCATION LAT:". $local->address_latitude.";LONGITUDE:".$local->address_longitude.";END",
+            )
+        );
+
         $local->save();
-        return view('configuration')->with('success','Address Changed Sucessfulyy');
+        return redirect()->route('config.index')->with('success','Location Changed Successfully');
+      
+
     }
 
     /**

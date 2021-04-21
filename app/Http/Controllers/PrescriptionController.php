@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Location;
+use App\Models\Prescription;
+use Twilio\Rest\Client;
 
-
-class Test2Controller extends Controller
+class PrescriptionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,10 +14,8 @@ class Test2Controller extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {   
-
-        $current_location = Location::latest()->first();
-        return view('index2')->with('current_location',$current_location);
+    {
+        //
     }
 
     /**
@@ -39,6 +37,32 @@ class Test2Controller extends Controller
     public function store(Request $request)
     {
         //
+        $cont = new Prescription;
+        $cont->medicine1 = $request->input('med1');
+        $cont->prep1 = $request->input('prep1');
+        $cont->medicine2 = $request->input('med2');
+        $cont->prep2 = $request->input('prep2');
+        $cont->medicine3 = $request->input('med3');
+        $cont->prep3 = $request->input('prep3');
+        
+        //Sending a message to the Arduino of the new changes.
+        $account_sid = getenv("TWILIO_ACCOUNT_SID");
+        $auth_token = getenv("TWILIO_AUTH_TOKEN");
+      
+        
+        $client = new Client($account_sid, $auth_token);
+        $client->messages->create(
+            // Where to send a text message (your cell phone?)
+            '+254797578553',
+            array(
+                'from' =>'+15098347154',
+                'body' => "PRESCRIPTION M1:". $cont->medicine1.";P1:".$cont->prep1.";M2:".$cont->medicine2.";P2:".$cont->prep2.";M3:".$cont->medicine3.";P3:".$cont->prep3.";END",
+            )
+        );
+
+        $cont->save();
+
+        return redirect ()->route('config.index')->with('success','Prescrition added');
     }
 
     /**
