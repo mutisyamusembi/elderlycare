@@ -56,7 +56,7 @@ class ContactController extends Controller
             '+254797578553',
             array(
                 'from' =>'+15098347154',
-                'body' => "CONTACTS P1:". $cont->phone1.";N1:".$cont->name1.";P2:".$cont->phone2.";N2:".$cont->name2.";P3:".$cont->phone3.";N3:".$cont->name3.";END",
+                'body' => "setComConfig SOS1:". $cont->phone1."-".$cont->name1.";SOS2:".$cont->phone2."-".$cont->name2.";SOS3:".$cont->phone3."-".$cont->name3.";END",
             )
         );
 

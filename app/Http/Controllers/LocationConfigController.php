@@ -48,10 +48,11 @@ class LocationConfigController extends Controller
         $client = new Client($account_sid, $auth_token);
         $client->messages->create(
             // Where to send a text message (your cell phone?)
+            //'+254718530690'
             '+254797578553',
             array(
                 'from' =>'+15098347154',
-                'body' => "LOCATION LAT:". $local->address_latitude.";LONGITUDE:".$local->address_longitude.";END",
+                'body' => "setGeoConfig LAT:". $local->address_latitude.";LOG:".$local->address_longitude.";END",
             )
         );
 
