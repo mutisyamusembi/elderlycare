@@ -15,8 +15,8 @@ class ContactController extends Controller
      */
     public function index()
     {   
-        $contact = Contacts::all();
-        return view('contact')->with('contact',$contact);
+        // $contact = Contacts::all()>orderBy('id', 'DESC')->first();
+        // return view('configuration')->with('contact',$contact);
     }
 
     /**
@@ -56,7 +56,7 @@ class ContactController extends Controller
             '+254797578553',
             array(
                 'from' =>'+15098347154',
-                'body' => "setComConfig SOS1:". $cont->phone1."-".$cont->name1.";SOS2:".$cont->phone2."-".$cont->name2.";SOS3:".$cont->phone3."-".$cont->name3.";END",
+                'body' => "setComConfig SOS1:". $cont->phone1.";SOS2:".$cont->phone2.";SOS3:".$cont->phone3.";END",
             )
         );
 

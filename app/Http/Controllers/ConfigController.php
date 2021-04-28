@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Contacts;
+use App\Models\Prescription;
 
 class ConfigController extends Controller
 {
@@ -13,7 +15,9 @@ class ConfigController extends Controller
      */
     public function index()
     {
-        return view('configuration');
+        $contact = Contacts::latest()->first();
+        $prescription = Prescription::latest()->first();
+        return view('configuration')->with('contact',$contact)->with('prescription',$prescription);
     }
 
     /**
