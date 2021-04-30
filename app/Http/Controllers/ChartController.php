@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Heartrate;
+use Illuminate\Support\Facades\DB;
 
 class ChartController extends Controller
 {
@@ -15,14 +16,34 @@ class ChartController extends Controller
     public function index()
     {
         //
-        $values = Heartrate::all();
-        $chart = array();
-        foreach($values as $value){
-            array_push($chart, $value->heartrate);
-        };
-
+        $values = DB::table('heartrates')
+                //Heartrate::all()
+        //DB::raw("DATE_SUB(CURDATE() ,INTERVAL 1 DAY)")
+                 // ->where('created_at','<',DB::raw('CURDATE()'));
+                 ->whereRaw('created_at >= DATE_SUB( CURDATE(), INTERVAL 1 WEEK )')
+                 ->orderBy('created_at','desc')
+        ->get(); 
+        $chart_values = array();
+        $chart_label = array();
         
-        return view('chart')->with('chart',$chart);
+
+        // foreach($values as $value){
+        //     $jsonArrayItem = array();
+        //     $jsonArrayItem['label'] = $value->created_at;
+        //     $jsonArrayItem['value'] = $value->heartrate;
+            
+        //     array_push($chart, $jsonArrayItem);
+        // };
+            foreach ($values as $value){
+              
+                    array_push($chart_values,$value->heartrate);
+                    array_push($chart_label,$value->created_at);
+            };
+
+            return view('chart2')->with('chart_values',$chart_values)->with('chart_label',$chart_label);
+        
+        // return view('chart')->with('chart',$chart);
+
 
     }
 
