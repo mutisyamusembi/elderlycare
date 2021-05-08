@@ -13,6 +13,7 @@ class ChartController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+     
     public function index()
     {
         //
@@ -20,7 +21,7 @@ class ChartController extends Controller
                 //Heartrate::all()
         //DB::raw("DATE_SUB(CURDATE() ,INTERVAL 1 DAY)")
                  // ->where('created_at','<',DB::raw('CURDATE()'));
-                 ->whereRaw('created_at >= DATE_SUB( CURDATE(), INTERVAL 1 WEEK )')
+                 ->whereRaw('created_at >= DATE_SUB( NOW(), INTERVAL 1 HOUR )')
                  ->orderBy('created_at','desc')
         ->get(); 
         $chart_values = array();
@@ -47,15 +48,17 @@ class ChartController extends Controller
 
     }
 
+
+
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
-    }
+    // public function create()
+    // {
+    //     //
+    // }
 
     /**
      * Store a newly created resource in storage.
@@ -64,8 +67,65 @@ class ChartController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
+    {  
+         // Get value of time period from the dropdown
+        $time_period = $request->input('category');
+
+        // Get the last values of one hour
+        if ($time_period == 'Last_One_Hour'){
+
+            $values = DB::table('heartrates')
+            
+                 ->whereRaw('created_at >= DATE_SUB( CURDATE(), INTERVAL 1 HOUR )')
+                 ->orderBy('created_at','desc')
+        ->get(); 
+        $chart_values = array();
+        $chart_label = array();
+
+        foreach ($values as $value){
+                
+                array_push($chart_values,$value->heartrate);
+                array_push($chart_label,$value->created_at);
+        };
+
+        return view('chart2')->with('chart_values',$chart_values)->with('chart_label',$chart_label);
+
+        } elseif ($time_period == 'Last_Day') {
+            $values = DB::table('heartrates')
+            
+                 ->whereRaw('created_at >= DATE_SUB( CURDATE(), INTERVAL 1 DAY )')
+                 ->orderBy('created_at','desc')
+        ->get(); 
+        $chart_values = array();
+        $chart_label = array();
+
+        foreach ($values as $value){
+                
+                array_push($chart_values,$value->heartrate);
+                array_push($chart_label,$value->created_at);
+        };
+
+        return view('chart2')->with('chart_values',$chart_values)->with('chart_label',$chart_label);
+
+        } else {
+            $values = DB::table('heartrates')
+            
+                 ->whereRaw('created_at >= DATE_SUB( CURDATE(), INTERVAL 1 WEEK )')
+                 ->orderBy('created_at','desc')
+        ->get(); 
+        $chart_values = array();
+        $chart_label = array();
+
+        foreach ($values as $value){
+                
+                array_push($chart_values,$value->heartrate);
+                array_push($chart_label,$value->created_at);
+        };
+
+        return view('chart2')->with('chart_values',$chart_values)->with('chart_label',$chart_label);
+        }
+
+
     }
 
     /**

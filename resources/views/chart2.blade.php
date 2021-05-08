@@ -82,7 +82,26 @@
 <div class="row">
     <div class="col-xl-12 col-lg-12 mt-2">
 
-    <canvas id="myChart" width="400" height="200"></canvas>
+    <canvas id="myChart" width="400" height="180"></canvas>
+
+    <form method="POST" action="{{action('App\Http\Controllers\ChartController@store')}}">
+                                    @csrf   
+        <p>Adjust Time Period for Chart</p>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <label class="input-group-text" for="inputGroupSelect01">Time period</label>
+            </div>
+              <select class="custom-select" name="category" id="inputGroupSelect01">
+                <option selected>Choose...</option>
+                <option value="Last_One_Hour">Last One Hour</option>
+                <option value="Last_Day">Last Day</option>
+                <option value="Last_Week">Last Week</option>
+                
+              </select>
+        </div>            
+
+        <button type ="submit" class=" mr-2 btn btn-primary" >Apply</button>
+    </form>
 <script>
 var ctx = document.getElementById('myChart');
 var data = {
