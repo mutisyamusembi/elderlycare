@@ -28,3 +28,4 @@ Route::resource('/config','App\Http\Controllers\ConfigController');
 Route::resource('/locationconf','App\Http\Controllers\LocationConfigController');
 Route::resource('/prep','App\Http\Controllers\PrescriptionController');
 Route::resource('/chart','App\Http\Controllers\ChartController');
+Route::resource('/map','App\Http\Controllers\MapController');

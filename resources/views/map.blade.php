@@ -1,64 +1,75 @@
-<!DOCTYPE html>
-<html>
-<head>
+@extends('main')
 
-<link rel="stylesheet" type="text/css" href="https://bootswatch.com  /cerulean/bootstrap.css" ></link>
-<link rel="stylesheet" href="https://bootswatch.com/assets/css/custom.min.css">
+@section('content')
+<script>
+    
+        let map;
+  
+        function initMap() {
+          map = new google.maps.Map(document.getElementById("map"), {
+            center: { lat: {{$current_location->address_latitude}} , lng: {{$current_location->address_longitude}}  },
+            zoom: 15,
+          });
 
+          <?php foreach($locations as $location) { ?>
 
- <script src="http://maps.googleapis.com/maps/api/js"></script>
- <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+          var marker = new google.maps.Marker({
+              map:map,
+              position: { lat:  {{ $location->address_latitude }} , lng: {{ $location->address_longitude }} }
 
+          });
 
- <script>
- function initialize() {
-   var mapProp = {
-     center:new google.maps.LatLng(51.508742,-0.120850),
-     zoom:5,
-     mapTypeId:google.maps.MapTypeId.ROADMAP
-   };
-  var map=new     google.maps.Map(document.getElementById("googleMap"),mapProp);
- }
- google.maps.event.addDomListener(window, 'load', initialize);
-
- var marker = new google.maps.Marker({
-    position:{ lat: -1.2834, lng: 36.8235 },
-    title:"Hello World!"
-    map: map;
-});
-
-// To add the marker to the map, call setMap();
-marker.setMap(map);
- </script>
-
- </head>
+          <?php }?>
+        //   var pathCoordinates = Array();
 
 
- <div class="panel panel-default well">
+          // location_json = {!! json_encode($locations) !!};
+          // location_json .forEach(function(location){
 
-   <div class="row">
+          //   var marker = new google.maps.Marker({
+          //   map: map,
+          //   position:  { lat: location->address_latitude , lng: location->address_longitude },
+          //   });
+          //     console.log(location);
 
-     <div class= "col-sm-4"  style='background-color: white; overflow: hidden' >
-   <p>Column 1</p>
+          // });
 
-  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/HRSOA_AsherDurand-First_harvest_wilderness_1855.jpg/1280px-HRSOA_AsherDurand-First_harvest_wilderness_1855.jpg" alt="landscape" class="img-responsive"  > 
+        
 
-     </div>
+       
+          }
 
-     <div class= "col-sm-4" style='background-color: white;overflow: hidden'>
-        <p>Column 2</p>
+        
+      </script> 
 
-        <body>
-        <div id="googleMap" style="width:500px;height:380px;"></div>
-        </body>
+                    <div class="d-sm-flex align-items-center justify-content-between mt-4">
+                        <h1 class="h3 mb-0 text-gray-800">Home</h1>
+                        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"> Actions</a>
+                    </div>
 
-     </div>
+<div class="row">
+    <div class="col-xl-12 col-lg-12 mt-2">
 
-     <div class= "col-sm-4" style='background-color: white'>
-         <p>Column 3</p>
+        <div class="card shadow mb-4">
+            <!-- Card Header -->
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold text-primary">Current Location</h6>
+            </div>
 
-     </div>
+            
+            <!-- Card Body -->
+            <div class="card-body">
+             <!-- Map -->
+                <div id="map" style="width:1200px;height:510px" >
+                </div>
+                <script 
+                src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAPS_API_KEY')}}&callback=initMap&libraries=places&v=weekly" async >
+                </script>
+            </div>
 
-   </div>
+        </div>
+    </div>
 
- </div>
+</div>
+
+@endsection

@@ -76,7 +76,7 @@ class ChartController extends Controller
 
             $values = DB::table('heartrates')
             
-                 ->whereRaw('created_at >= DATE_SUB( CURDATE(), INTERVAL 1 HOUR )')
+                 ->whereRaw('created_at >= DATE_SUB( NOW(), INTERVAL 1 HOUR )')
                  ->orderBy('created_at','desc')
         ->get(); 
         $chart_values = array();
@@ -93,7 +93,7 @@ class ChartController extends Controller
         } elseif ($time_period == 'Last_Day') {
             $values = DB::table('heartrates')
             
-                 ->whereRaw('created_at >= DATE_SUB( CURDATE(), INTERVAL 1 DAY )')
+                 ->whereRaw('created_at >= DATE_SUB( NOW(), INTERVAL 1 DAY )')
                  ->orderBy('created_at','desc')
         ->get(); 
         $chart_values = array();
