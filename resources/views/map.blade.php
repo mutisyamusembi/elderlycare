@@ -16,10 +16,21 @@
           var marker = new google.maps.Marker({
               map:map,
               position: { lat:  {{ $location->address_latitude }} , lng: {{ $location->address_longitude }} }
-
+          
           });
+          var contentString ="{{$location->address_address}}";
+          var infowindow = new google.maps.InfoWindow({
+          content: contentString,
+                });
+
+          marker.addListener("click", () => {
+          infowindow.open(map, marker);
+            });
 
           <?php }?>
+
+          
+ 
         //   var pathCoordinates = Array();
 
 
@@ -53,7 +64,7 @@
         <div class="card shadow mb-4">
             <!-- Card Header -->
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <h6 class="m-0 font-weight-bold text-primary">Current Location</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Location tracker</h6>
             </div>
 
             
