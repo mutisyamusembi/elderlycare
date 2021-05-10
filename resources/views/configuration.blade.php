@@ -86,7 +86,18 @@
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">Reports</div>
                                         </div>
                                         <div class="col-auto">
-                                        <i class="fas fa-2x text-gray-300 fa-arrow-circle-right"></i>
+                                        
+
+                                        <div class="dropdown">
+  <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+  <i class="fas fa-2x text-gray-300 fa-arrow-circle-right"></i>
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <h5><a class="dropdown-item" href="{{ route('chart.index') }}">Heart rate Charts</a></h5>
+    <h5><a class="dropdown-item" href="{{ route('map.index') }}">Location Maps</a></h5>
+    
+  </div>
+</div>
                                         </div>
                                     </div>
                                 </div>
