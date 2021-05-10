@@ -40,7 +40,41 @@ class MapController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+        // Get value of time period from the dropdown
+        $time_period = $request->input('category');
+        $current_location = Location::latest()->first();
+
+        // Get the last values of one hour
+        if ($time_period == 'Last_One_Hour'){
+
+            $locations = DB::table('locations')
+            
+                 ->whereRaw('created_at >= DATE_SUB( NOW(), INTERVAL 1 HOUR )')
+                 ->orderBy('created_at','desc')
+                 ->get(); 
+        
+        return view('map')->with('locations',$locations)->with('current_location',$current_location);
+
+        } elseif ($time_period == 'Last_Day') {
+            $locations = DB::table('locations')
+            
+                 ->whereRaw('created_at >= DATE_SUB( NOW(), INTERVAL 1 DAY )')
+                 ->orderBy('created_at','desc')
+                 ->get();   
+                     
+        return view('map')->with('locations',$locations)->with('current_location',$current_location);
+
+        } else {
+            $locations = DB::table('locations')
+            
+                 ->whereRaw('created_at >= DATE_SUB( CURDATE(), INTERVAL 1 WEEK )')
+                 ->orderBy('created_at','desc')
+                 ->get(); 
+    
+        return view('map')->with('locations',$locations)->with('current_location',$current_location);
+        }
+
     }
 
     /**

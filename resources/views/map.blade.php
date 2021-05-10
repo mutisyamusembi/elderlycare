@@ -60,8 +60,26 @@
             <!-- Card Body -->
             <div class="card-body">
              <!-- Map -->
-                <div id="map" style="width:1200px;height:510px" >
+                <div id="map" style="width:1200px;height:510px">
                 </div>
+                <form method="POST" action="{{action('App\Http\Controllers\MapController@store')}}">
+                                    @csrf   
+                    <p>Adjust Time Period for Chart</p>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="inputGroupSelect01">Time period</label>
+                        </div>
+                        <select class="custom-select" name="category" id="inputGroupSelect01">
+                            <option selected>Choose...</option>
+                            <option value="Last_One_Hour">Last One Hour</option>
+                            <option value="Last_Day">Last Day</option>
+                            <option value="Last_Week">Last Week</option>
+                            
+                        </select>
+                    </div>            
+
+                    <button type ="submit" class=" mr-2 btn btn-primary" >Apply</button>
+                </form>
                 <script 
                 src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAPS_API_KEY')}}&callback=initMap&libraries=places&v=weekly" async >
                 </script>
