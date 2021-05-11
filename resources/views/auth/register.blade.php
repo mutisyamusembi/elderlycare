@@ -43,22 +43,19 @@
 						<input class="input100" type="text" name="serial">
 						<span class="focus-input100" data-placeholder="Serial No"></span>
 
-						@error('serial')
-								<span class="invalid-feedback" role="alert">
-									<strong>{{ $message }}</strong>
-								</span>
-							@enderror
+					</div>
+
+
+                    <div class="wrap-input100 validate-input m-t-5 m-b-35" data-validate = " Enter a valid Email">
+						<input class="input100" type="email" name="email">
+						<span class="focus-input100" data-placeholder="Email"></span>
+
 					</div>
 
 					<div class="wrap-input100 validate-input m-b-50" data-validate="Enter password">
 						<input class="input100" type="password" name="password">
 						<span class="focus-input100" data-placeholder=" Enter Password"></span>
 
-						@error('password')
-							<span class="invalid-feedback" role="alert">
-								<strong>{{ $message }}</strong>
-							</span>
-						@enderror
 					</div>
 
 					<div class="wrap-input100 validate-input m-b-50" data-validate="Repeat password">

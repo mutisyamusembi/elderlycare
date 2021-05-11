@@ -24,11 +24,11 @@ Route::get('/home','App\Http\Controllers\PagesController@index');
 Route::resource('/test','App\Http\Controllers\TestController');
 Route::resource('/contact','App\Http\Controllers\ContactController');
 Route::resource('/test2','App\Http\Controllers\Test2Controller');
-Route::resource('/config','App\Http\Controllers\ConfigController');
-Route::resource('/locationconf','App\Http\Controllers\LocationConfigController');
-Route::resource('/prep','App\Http\Controllers\PrescriptionController');
-Route::resource('/chart','App\Http\Controllers\ChartController');
-Route::resource('/map','App\Http\Controllers\MapController');
+Route::resource('/config','App\Http\Controllers\ConfigController')->middleware('auth');
+Route::resource('/locationconf','App\Http\Controllers\LocationConfigController')->middleware('auth');
+Route::resource('/prep','App\Http\Controllers\PrescriptionController')->middleware('auth');
+Route::resource('/chart','App\Http\Controllers\ChartController')->middleware('auth');
+Route::resource('/map','App\Http\Controllers\MapController')->middleware('auth');
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
