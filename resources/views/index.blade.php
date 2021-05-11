@@ -9,6 +9,7 @@
           map = new google.maps.Map(document.getElementById("map"), {
             center: { lat: {{$current_location->address_latitude}} , lng: {{$current_location->address_longitude}} },
             zoom: 18,
+            
           });
 
         var marker = new google.maps.Marker({

@@ -16,6 +16,8 @@ class PrescriptionController extends Controller
     public function index()
     {
         //
+        $prescription = Prescription::latest()->first();
+        return view('editprep')->with('prescription',$prescription);
     }
 
     /**
@@ -62,7 +64,7 @@ class PrescriptionController extends Controller
 
         $cont->save();
 
-        return redirect ()->route('config.index')->with('success','Prescrition added');
+        return redirect ()->route('config.index')->with('success','Prescrition saved');
     }
 
     /**

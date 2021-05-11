@@ -90,7 +90,9 @@
                     </div>            
 
                     <button type ="submit" class=" mr-2 btn btn-primary" >Apply</button>
+                    <a  href="{{ route('config.index')}}" class="text-center  btn btn-secondary">Back <i class="fas fa-arrow-left"></i></a>
                 </form>
+                
                 <script 
                 src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAPS_API_KEY')}}&callback=initMap&libraries=places&v=weekly" async >
                 </script>

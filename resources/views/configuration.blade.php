@@ -88,16 +88,16 @@
                                         <div class="col-auto">
                                         
 
-                                        <div class="dropdown">
-  <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-  <i class="fas fa-2x text-gray-300 fa-arrow-circle-right"></i>
-  </button>
-  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-    <h5><a class="dropdown-item" href="{{ route('chart.index') }}">Heart rate Charts</a></h5>
-    <h5><a class="dropdown-item" href="{{ route('map.index') }}">Location Maps</a></h5>
-    
-  </div>
-</div>
+                                            <div class="dropdown">
+                                                    <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <i class="fas fa-2x text-gray-300 fa-arrow-circle-right"></i>
+                                                    </button>
+                                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                        <h5><a class="dropdown-item" href="{{ route('chart.index') }}">Heart rate Charts</a></h5>
+                                                        <h5><a class="dropdown-item" href="{{ route('map.index') }}">Location Maps</a></h5>
+                                                        
+                                                    </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -116,7 +116,7 @@
                                         <form method="POST" action="{{action('App\Http\Controllers\ContactController@store')}}">
                                         @csrf
 
-                                        You can only add 3 contacts. Add Emergency contacts here
+                                        Incase of an Emergency, these contacts will be notified.
                                         
                                             
                                                 <div class="form-row mt-2">
@@ -151,8 +151,8 @@
                                                     </div>
 
                                                 </div>
-                                        
-                                            <div class="text-center mt-4"><button name="submit" type="submit" class=" btn btn-primary" >Save</button></div>
+                                                <a  href="{{ route('contact.index')}}" class="text-center mt-4 btn btn-secondary">Edit <i class="fas fa-edit"></i></a>
+                                            
                                         </form>
                                             
                                         
@@ -176,7 +176,7 @@
                                         @csrf
                                                
                                            
-                                            Add Prescriptions here
+                                                 A buzzer will be sent to remind of medication 
                                                 <div class="form-row mt-2">
                                                     <div class="form-group col-md-5">
                                                         <input type="text" name="med1" class="form-control" id="med1" data-rule="minlen:4" value="{{$prescription->medicine1}}" placeholder="Medicine"data-msg="Please enter at least 4 chars" required />
@@ -200,6 +200,7 @@
                                                 </div>
 
                                                 <div class="form-row mt-2">
+
                                                     <div class="form-group col-md-5">
                                                         <input type="text" name="med3" class="form-control" id="med3" data-rule="minlen:4" value="{{$prescription->medicine3}}" placeholder="Medicine" data-msg="Please enter at least 4 chars" required />
                                                     </div>
@@ -210,9 +211,9 @@
 
                                                 </div>
 
-                                            </div>
+                                            
                                         
-                                            <div class="text-center mt-4"><button name="submit" type="submit" class=" tbn btn-primary" >Save</button></div>
+                                            <a  href="{{ route('prep.index')}}" class="text-center mt-4 btn btn-secondary">Edit <i class="fas fa-edit"></i></a>
                                         </form>
                                             
                                         

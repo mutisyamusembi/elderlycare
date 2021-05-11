@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Prep;
+use App\Models\Prepscription;
 use Twilio\Rest\Client;
 
 class PrepController extends Controller
@@ -15,9 +15,11 @@ class PrepController extends Controller
      */
     public function index()
     {   
-        $preps = Prep::all();
+        // $preps = Prep::all();
 
-        return view('med')->with('prep',$preps);
+        // return view('med')->with('prep',$preps);
+        $prescription = Prescription::latest()->first();
+        return veiw('editprep')->with('prescription',$precription);
     }
 
     /**

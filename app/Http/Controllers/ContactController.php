@@ -17,6 +17,8 @@ class ContactController extends Controller
     {   
         // $contact = Contacts::all()>orderBy('id', 'DESC')->first();
         // return view('configuration')->with('contact',$contact);
+        $contact = Contacts::latest()->first();
+        return view ('editcontact')->with('contact',$contact);
     }
 
     /**
@@ -62,7 +64,7 @@ class ContactController extends Controller
 
         $cont->save();
 
-        return redirect ()->route('config.index')->with('success','Contacts added');
+        return redirect ()->route('config.index')->with('success','Contacts saved');
     }
 
     /**
