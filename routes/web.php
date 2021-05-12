@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::resource('/','App\Http\Controllers\HomeController');
-Route::get('/home','App\Http\Controllers\PagesController@index');
+Route::get('/info','App\Http\Controllers\PagesController@index')->middleware('auth');
 //Route::resource('/prep','App\Http\Controllers\PrepController');
 Route::resource('/test','App\Http\Controllers\TestController');
 Route::resource('/contact','App\Http\Controllers\ContactController');

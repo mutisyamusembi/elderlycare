@@ -67,7 +67,7 @@
                     
                         <div class="container-login100-form-btn mt-5">
                                     
-                                    <a class="login100-form-btn" href="{{ route('locationconf.index')}}">
+                                    <a class="login100-form-btn"  href="{{ route('locationconf.index')}}"> 
                                        Continue <i class="fas fa-arrow-right p-l-8"></i> </a>
                                    
                                 </div>
