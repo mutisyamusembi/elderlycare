@@ -41,11 +41,19 @@ class PrescriptionController extends Controller
         //
         $cont = new Prescription;
         $cont->medicine1 = $request->input('med1');
-        $cont->prep1 = $request->input('prep1');
+        $prep1 =$request->input('prep1');
+        $prep1_times = $request->input('prep1_times');
+        $cont->prep1 = "$prep1"." * "." $prep1_times";
+
         $cont->medicine2 = $request->input('med2');
-        $cont->prep2 = $request->input('prep2');
+        $prep2 =$request->input('prep2');
+        $prep2_times =$request->input('prep2_times');
+        $cont->prep2 = "$prep2"." * "." $prep2_times" ;
+           
         $cont->medicine3 = $request->input('med3');
-        $cont->prep3 = $request->input('prep3');
+        $prep3 =$request->input('prep3');
+        $prep3_times =$request->input('prep3_times');
+        $cont->prep3 = "$prep3"." * "." $prep3_times";
         
         //Sending a message to the Arduino of the new changes.
         $account_sid = getenv("TWILIO_ACCOUNT_SID");

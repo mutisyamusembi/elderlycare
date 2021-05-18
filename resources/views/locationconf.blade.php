@@ -25,11 +25,13 @@
                                 
                                     <form method="POST" action="{{action('App\Http\Controllers\LocationConfigController@store')}}">
                                     @csrf   
-                                            <input type="text" name="location" id="location" placeholder="Location Name">
+                                            <input type="text" name="location" id="location" placeholder="Location Name" required>
 
-                                            <input type="text" name="lat" id="lat" placeholder="Latitude">
+                                            <input type="text" name="lat" id="lat" placeholder="Latitude" required>
 
-                                            <input type="text" name="lng" id="lng" placeholder="Longitude">
+                                            <input type="text" name="lng" id="lng" placeholder="Longitude" required>
+
+                                            <input type="text" name="diam" id="diam" placeholder="Allowed diameter(m)" required>
 
                                             <button type ="submit" class=" mr-2 btn btn-primary" >Save</button>
                                             

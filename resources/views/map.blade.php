@@ -7,7 +7,7 @@
   
         function initMap() {
           map = new google.maps.Map(document.getElementById("map"), {
-            center: { lat: {{$current_location->address_latitude}} , lng: {{$current_location->address_longitude}}  },
+            center: { lat: {{$current_location->latitude}} , lng: {{$current_location->longitude}}  },
             zoom: 15,
           });
 
@@ -15,10 +15,10 @@
 
           var marker = new google.maps.Marker({
               map:map,
-              position: { lat:  {{ $location->address_latitude }} , lng: {{ $location->address_longitude }} }
+              position: { lat:  {{ $location->latitude }} , lng: {{ $location->longitude }} }
           
           });
-          var contentString ="{{$location->address_address}}";
+          var contentString ="{{$location->created_at}}";
           var infowindow = new google.maps.InfoWindow({
           content: contentString,
                 });
@@ -44,18 +44,28 @@
           //     console.log(location);
 
           // });
+          document.getElementById('download-pdf2').addEventListener("click", downloadPDF2);
+
+function downloadPDF2() {
+var newCanvas = document.querySelector('#map_content');
+var newCanvasImg = newCanvas.toDataURL("image/jpeg", 1.0);
+var doc = new jsPDF('landscape');
+doc.setFontSize(20);
+doc.text(15, 15, "Super Cool Chart");
+doc.addImage(newCanvasImg, 'JPEG', 10, 10, 280, 150 );
+doc.save('new-canvas.pdf');
+}
 
         
 
        
           }
-
-        
+          
       </script> 
 
                     <div class="d-sm-flex align-items-center justify-content-between mt-4">
                         <h1 class="h3 mb-0 text-gray-800">Home</h1>
-                        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"> Actions</a>
+    
                     </div>
 
 <div class="row">
@@ -71,7 +81,8 @@
             <!-- Card Body -->
             <div class="card-body">
              <!-- Map -->
-                <div id="map" style="width:1200px;height:510px">
+                <div  id="map" style="width:1200px;height:510px">
+                <canvas id="map"    ></canvas>
                 </div>
                 <form method="POST" action="{{action('App\Http\Controllers\MapController@store')}}">
                                     @csrf   

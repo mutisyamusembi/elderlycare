@@ -51,11 +51,16 @@
                                                                                         <input type="text" name="med1" class="form-control" id="med1" data-rule="minlen:4" value="{{$prescription->medicine1}}" placeholder="Medicine"data-msg="Please enter at least 4 chars" required />
                                                                                     </div>
 
-                                                                                    <div class="form-group col-md-6">
-                                                                                    <label for="prep1" >Prescription</label>
-                                                                                        <input type="text" class="form-control" name="prep1" id="prep1" data-rule="minlen:4" value="{{$prescription->prep1}}" placeholder ="Prescriprion(Quantity * Occurence)" data-msg="Please enter at least 8 chars of subject" required />
+                                                                                    <div class="form-group col-md-3">
+                                                                                    <label for="prep1" >Pills</label>
+                                                                                        <input type="number" class="form-control" name="prep1" id="prep1" data-rule="minlen:4" max ="3" data-msg="Number of pills" required />
                                                                                     </div>
 
+                                                                                    <div class="form-group col-md-3">
+                                                                                    <label for="prep1_times" >  Times daily</label>
+                                
+                                                                                        <input type="number" class="form-control" name="prep1_times" id="prep1_times" data-rule="minlen:4"  max ="3" data-msg="Number of times to be taken daily" required />
+                                                                                    </div>
                                                                                 </div>
 
                                                                                 <div class="form-row mt-2">
@@ -64,10 +69,18 @@
                                                                                         <input type="text" name="med2" class="form-control" id="med2" data-rule="minlen:4" value="{{$prescription->medicine2}}" placeholder="Medicine"data-msg="Please enter at least 4 chars" required />
                                                                                     </div>
 
-                                                                                    <div class="form-group col-md-6">
-                                                                                    <label for="prep2" >Prescription</label>
-                                                                                        <input type="text" class="form-control" name="prep2" id="prep2" data-rule="minlen:4" value="{{$prescription->prep2}}" placeholder ="Prescriprion(Quantity * Occurence)" data-msg="Please enter at least 8 chars of subject" required />
+                                                                                    <div class="form-group col-md-3">
+                                                                                    <label for="prep2" >Pills</label>
+                                                                                        <input type="number" class="form-control" name="prep2" id="prep2" data-rule="minlen:4" max ="3" data-msg="Number of pills" required />
                                                                                     </div>
+
+                                                                                    <div class="form-group col-md-3">
+                                                                                    <label for="prep2_times" >  Times daily</label>
+                                
+                                                                                        <input type="number" class="form-control" name="prep2_times" id="prep2_times" data-rule="minlen:4"  max ="3" data-msg="Number of times to be taken daily" required />
+                                                                                    </div>
+
+                                                                                    
 
                                                                                 </div>
 
@@ -78,9 +91,15 @@
                                                                                         <input type="text" name="med3" class="form-control" id="med3" data-rule="minlen:4" value="{{$prescription->medicine3}}" placeholder="Medicine" data-msg="Please enter at least 4 chars" required />
                                                                                     </div>
 
-                                                                                    <div class="form-group col-md-6">
-                                                                                    <label for="prep3" >Prescription</label>
-                                                                                        <input type="text" class="form-control" name="prep3" id="prep3" data-rule="minlen:4"value="{{$prescription->prep3}}" placeholder ="Prescriprion(Quantity * Occurence)" data-msg="Please enter at least 8 chars of subject" required />
+                                                                                    <div class="form-group col-md-3">
+                                                                                    <label for="prep3" >Pills</label>
+                                                                                        <input type="number" class="form-control" name="prep3" id="prep3" data-rule="minlen:4" max ="3" data-msg="Number of pills" required />
+                                                                                    </div>
+
+                                                                                    <div class="form-group col-md-3">
+                                                                                    <label for="prep3_times" >  Times daily</label>
+                                
+                                                                                        <input type="number" class="form-control" name="prep3_times" id="prep3_times" data-rule="minlen:4"  max ="3" data-msg="Number of times to be taken daily" required />
                                                                                     </div>
 
                                                                                 </div>

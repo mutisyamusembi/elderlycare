@@ -81,34 +81,69 @@
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100 p-t-25 p-b-20">
+
+			@foreach ($errors->all() as $error) 
+				<div class="alert alert-danger" role="alert">
+                            {{ $error }}
+                        </div>
+					
+			@endforeach
 			
 					<form class="login100-form validate-form" method="POST" action="{{ route('register') }}">
                         @csrf
 					<span class="login100-form-title p-b-70">
 						Welcome
 					</span>
-					<div class="wrap-input100 validate-input m-t-5 m-b-35" data-validate = "Enter Serial No">
-						<input class="input100" type="text" name="serial">
+					<div class="wrap-input100 validate-input m-t-5 m-b-35 form-control form-control-user @error('serial') is-invalid @enderror" data-validate = "Enter Serial No" required minlength = "8">
+						<input class="input100" type="text" name="serial" value="{{old('serial')}}">
 						<span class="focus-input100" data-placeholder="Serial No"></span>
 
+						@error('serial')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+
 					</div>
 
 
-                    <div class="wrap-input100 validate-input m-t-5 m-b-35" data-validate = " Enter a valid Email">
-						<input class="input100" type="email" name="email">
+                    <div class="wrap-input100 validate-input m-t-5 m-b-35 form-control form-control-user @error('email') is-invalid @enderror" data-validate = " Enter a valid Email">
+						<input class="input100" type="email" name="email" value="{{old('email')}}" >
 						<span class="focus-input100" data-placeholder="Email"></span>
 
+						@error('email')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+						
+
+						
+
 					</div>
 
-					<div class="wrap-input100 validate-input m-b-50" data-validate="Enter password">
+					<div class="wrap-input100 validate-input m-b-50 form-control form-control-user @error('password') is-invalid @enderror" data-validate="Enter password">
 						<input class="input100" type="password" name="password">
 						<span class="focus-input100" data-placeholder=" Enter Password"></span>
 
+						@error('password')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+
 					</div>
 
-					<div class="wrap-input100 validate-input m-b-50" data-validate="Repeat password">
+					<div class="wrap-input100 validate-input m-b-50 form-control form-control-user @error('serial') is-invalid @enderror" data-validate="Repeat password">
 						<input class="input100" type="password" name="password_confirmation">
 						<span class="focus-input100" data-placeholder="Confirm Password"></span>
+
+						@error('password_confirmation')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+						
 					</div>
 
 					<div class="container-login100-form-btn">

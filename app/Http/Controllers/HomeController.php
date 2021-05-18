@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Location;
+use App\Models\Sensordata;
 
 class HomeController extends Controller
 {
@@ -24,7 +25,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $current_location = Location::latest()->first();
-        return view('index')->with('current_location',$current_location);
+        $home_location = Location::latest()->first();
+        $current_location = Sensordata::latest()->first();
+        return view('index')->with('home_location',$home_location)->with('current_location',$current_location);
     }
 }

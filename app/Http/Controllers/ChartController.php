@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Heartrate;
 use Illuminate\Support\Facades\DB;
+use App\Models\Sensordata;
 
 class ChartController extends Controller
 {
@@ -17,12 +18,19 @@ class ChartController extends Controller
     public function index()
     {
         //
-        $values = DB::table('heartrates')
-                //Heartrate::all()
-        //DB::raw("DATE_SUB(CURDATE() ,INTERVAL 1 DAY)")
-                 // ->where('created_at','<',DB::raw('CURDATE()'));
-                 ->whereRaw('created_at >= DATE_SUB( NOW(), INTERVAL 1 HOUR )')
-                 ->orderBy('created_at','desc')
+        // $values = DB::table('heartrates')
+        //         //Heartrate::all()
+        // //DB::raw("DATE_SUB(CURDATE() ,INTERVAL 1 DAY)")
+        //          // ->where('created_at','<',DB::raw('CURDATE()'));
+        //          ->whereRaw('created_at >= DATE_SUB( NOW(), INTERVAL 1 HOUR )')
+        //          ->orderBy('created_at','desc')
+        // ->get(); 
+
+
+
+        $values = DB::table('sensordatas')
+        ->whereRaw('created_at >= DATE_SUB( NOW(), INTERVAL 1 HOUR )')
+        ->orderBy('created_at','desc')
         ->get(); 
         $chart_values = array();
         $chart_label = array();
@@ -35,11 +43,19 @@ class ChartController extends Controller
             
         //     array_push($chart, $jsonArrayItem);
         // };
+//TO REVERT TO THIS 
+            // foreach ($values as $value){
+              
+            //         array_push($chart_values,$value->heartrate);
+            //         array_push($chart_label,$value->created_at);
+            // };
+// SERVER VALUES FROM SENSOR
             foreach ($values as $value){
               
-                    array_push($chart_values,$value->heartrate);
-                    array_push($chart_label,$value->created_at);
-            };
+                array_push($chart_values,$value->heartrate);
+                array_push($chart_label,$value->created_at);
+        };
+
 
             return view('chart2')->with('chart_values',$chart_values)->with('chart_label',$chart_label);
         

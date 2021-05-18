@@ -86,7 +86,13 @@
 		<div class="limiter">
 			<div class="container-login100">
 				<div class="wrap-login100 p-t-25 p-b-20">
-				
+							@foreach ($errors->all() as $error) 
+							<div class="alert alert-danger" role="alert">
+										{{ $error }}
+									</div>
+								
+						@endforeach
+							
 						<form class="login100-form validate-form" method="POST" action="{{ route('login') }}">
 							@csrf
 						<span class="login100-form-title p-b-70">

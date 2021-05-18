@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Location;
 use Illuminate\Support\Facades\DB;
+use App\Models\Sensordata;
 
 class MapController extends Controller
 {
@@ -15,8 +16,8 @@ class MapController extends Controller
      */
     public function index()
     {   
-        $locations = Location::all();
-        $current_location = Location::latest()->first();
+        $locations= Sensordata::all();
+        $current_location = Sensordata::latest()->first();
         // $locations = DB::table('locations')
         //              ->get();
         return view('map')->with('locations',$locations)->with('current_location',$current_location);
